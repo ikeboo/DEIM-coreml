@@ -343,7 +343,7 @@ If you'd like to train **DEIM** on COCO2017 with an input size of 320x320, follo
 <!-- <summary>4. Export onnx </summary> -->
 1. Setup
 ```shell
-pip install onnx onnxsim
+pip install onnx onnxsim coremltools
 ```
 
 2. Export onnx
@@ -354,6 +354,11 @@ python tools/deployment/export_onnx.py --check -c configs/deim_dfine/deim_hgnetv
 3. Export [tensorrt](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html)
 ```shell
 trtexec --onnx="model.onnx" --saveEngine="model.engine" --fp16
+```
+
+4. Export coreml
+```shell
+python tools/deployment/export_coreml.py -m model.pth -o model.mlpackage
 ```
 
 </details>
