@@ -21,9 +21,18 @@ __all__ = [
 INCLUDE_KEY = '__include__'
 
 
-def load_config(file_path, cfg=dict()):
-    """load config
+def load_config(file_path, cfg=None):
+    """Load configuration from ``file_path`` and merge it into ``cfg``.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to the yaml file.
+    cfg : dict | None
+        Base configuration dictionary. ``None`` will create a new one.
     """
+    if cfg is None:
+        cfg = {}
     _, ext = os.path.splitext(file_path)
     assert ext in ['.yml', '.yaml'], "only support yaml files"
 
@@ -41,9 +50,8 @@ def load_config(file_path, cfg=dict()):
             if not base_yaml.startswith('/'):
                 base_yaml = os.path.join(os.path.dirname(file_path), base_yaml)
 
-            with open(base_yaml) as f:
-                base_cfg = load_config(base_yaml, cfg)
-                merge_dict(cfg, base_cfg)
+            base_cfg = load_config(base_yaml, cfg)
+            merge_dict(cfg, base_cfg)
 
     return merge_dict(cfg, file_cfg)
 
