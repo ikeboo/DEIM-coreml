@@ -351,7 +351,12 @@ pip install onnx onnxsim
 python tools/deployment/export_onnx.py --check -c configs/deim_dfine/deim_hgnetv2_${model}_coco.yml -r model.pth
 ```
 
-3. Export [tensorrt](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html)
+3. Export CoreML
+```shell
+python tools/deployment/export_coreml.py -c configs/dfine/dfine_hgnetv2_l_coco.yml -r model.pth -o model.mlpackage
+```
+
+4. Export [tensorrt](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html)
 ```shell
 trtexec --onnx="model.onnx" --saveEngine="model.engine" --fp16
 ```

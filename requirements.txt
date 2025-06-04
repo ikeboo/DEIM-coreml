@@ -6,3 +6,4 @@ tensorboard
 scipy
 calflops
 transformers
+coremltools>=7.0
